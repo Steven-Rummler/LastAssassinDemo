@@ -39,7 +39,7 @@ function joinLobby() {
             return response.json();
         }) .then(function(json) {
             document.getElementById("hostName").innerHTML = "Host: " + json.host;
-            document.getElementById("gameMode").innerHTML = "gameMode: " + json.mode;
+            document.getElementById("gameMode").innerHTML = "Mode: " + json.mode;
             document.getElementById("numPlayers").innerHTML = "Players: " + json.players;
         });
     // Reset event listeners
