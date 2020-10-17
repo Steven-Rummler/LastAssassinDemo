@@ -43,13 +43,6 @@
     width: auto;
 }
 
-.bottom {
-    height: 50px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-}
-
 .alert {
     position: fixed;
     width: 96%;
@@ -57,10 +50,35 @@
     margin: 2%;
 }
 
+#footer-div {
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    color: white;
+}
+
+.footer-item {
+  margin: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+.footer-item:hover {
+  color: white;
+}
+
 /* mobile styles*/
 @media only screen and (max-width: 400px) {
     .alert {
         display: none;
+    }
+
+    #name {
+        font-size: 14px;
     }
 }
 
