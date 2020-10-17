@@ -46,18 +46,32 @@
     width: 100%;
     position: fixed;
     bottom: 0;
-  }
+}
+
+.alert {
+    position: fixed;
+    width: 96%;
+    text-align: center;
+    margin: 2%;
+}
 
 /* mobile styles*/
 @media only screen and (max-width: 400px) {
-
-    
+    .alert {
+        display: none;
+    }
 }
 
 /* Tablet Styles */
-@media only screen and (max-width: 960px) {
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    .alert {
+        display: none;
+    }
 }
 
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
+    .alert {
+        display: block;
+    }
 }
