@@ -18,11 +18,11 @@ function createGame() {
     document.getElementById("mainMenu").addEventListener("click", mainMenu);
 }
 
-function joinGame(invalidCode) {
+function joinGame(error) {
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button id="demoCode" type="button" class="btn btn-secondary custombtn">Demo Code: abc</button><input class="form-control custombtn" id="gameCode" placeholder="Enter Game Code"><button id="joinLobby" type="button" class="btn btn-success custombtn">Join Lobby</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Main Menu</button></div>';
-    if (invalidCode != undefined) {
-        document.getElementById("gameCode").placeholder = invalidCode;
+    document.getElementById("content").innerHTML = '<div id="buttons"><button id="demoCode" type="button" class="btn btn-secondary custombtn">Demo Code: OSNG</button><input class="form-control custombtn" id="gameCode" placeholder="Enter Game Code"><button id="joinLobby" type="button" class="btn btn-success custombtn">Join Lobby</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Main Menu</button></div>';
+    if (typeof (error) == "string") {
+        document.getElementById("gameCode").placeholder = error;
     }
     // Reset event listeners
     document.getElementById("joinLobby").addEventListener("click", joinLobby);
@@ -69,7 +69,7 @@ function joinLobby() {
 
 function startLobby() {
     // Get values and generate game code
-    let code = makeCode(5);
+    let code = makeCode(4);
     let host = document.getElementById("hostName").value;
     let mode = document.getElementById("gameMode").value;
     // Go to the loading screen
@@ -120,7 +120,7 @@ function startLobby() {
 
 function makeCode(length) {
     let result = '';
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
