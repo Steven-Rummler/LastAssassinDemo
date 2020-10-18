@@ -29,18 +29,18 @@ function joinLobby() {
     const value = document.getElementById("gameCode").value;
     console.log(value);
     if (value === "")
-      return;
+        return;
     let url = "http://stevenrummler.com:8000/games/" + value;
     // Rebuild content section
     document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Joining Game</button></div>';
     // Display API data
-    const myHeaders = new Headers({'Content-Type':'application/json','Origin':'stevenrummler.com'});
-    const myRequest = new Request(url, {method:'GET',headers:myHeaders,mode:'cors',cache:'default',});
+    const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Origin': 'stevenrummler.com' });
+    const myRequest = new Request(url, { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default', });
     console.log(myRequest);
     fetch(myRequest)
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
-        }) .then(function(json) {
+        }).then(function (json) {
             if (json.detail === "Not found.") {
                 joinGame(true);
                 return;
@@ -49,11 +49,11 @@ function joinLobby() {
             document.getElementById("hostName").innerHTML = "Host: " + json.host;
             document.getElementById("gameMode").innerHTML = "Mode: " + json.mode;
             document.getElementById("numPlayers").innerHTML = "Players: " + json.players;
+            // Reset event listeners
+            document.getElementById("mainMenu").addEventListener("click", mainMenu);
         });
-    // Reset event listeners
-    document.getElementById("mainMenu").addEventListener("click", mainMenu);
 }
 
 document.getElementById("createGame").addEventListener("click", createGame);
 document.getElementById("joinGame").addEventListener("click", joinGame);
-document.getElementById("alert").addEventListener("click", ()=>{document.getElementById("alert").style.display = "none"})
+document.getElementById("alert").addEventListener("click", () => { document.getElementById("alert").style.display = "none" })
