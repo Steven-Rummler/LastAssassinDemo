@@ -53,5 +53,5 @@ function joinLobby() {
 }
 
 document.getElementById("createGame").addEventListener("click", createGame);
-document.getElementById("joinGame").addEventListener("click", joinGame());
+document.getElementById("joinGame").addEventListener("click", joinGame);
 document.getElementById("alert").addEventListener("click", ()=>{document.getElementById("alert").style.display = "none"})
