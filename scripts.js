@@ -32,7 +32,7 @@ function joinLobby() {
       return;
     let url = "http://stevenrummler.com:8000/games/" + value;
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button id="hostName" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameMode" type="button" class="btn btn-secondary custombtn">Game Mode</button><button id="numPlayers" type="button" class="btn btn-secondary custombtn">Numbers of Players</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Leave Game</button></div>';
+    document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Joining Game</button></div>';
     // Display API data
     const myHeaders = new Headers({'Content-Type':'application/json','Origin':'stevenrummler.com'});
     const myRequest = new Request(url, {method:'GET',headers:myHeaders,mode:'cors',cache:'default',});
@@ -43,7 +43,9 @@ function joinLobby() {
         }) .then(function(json) {
             if (json.detail === "Not found.") {
                 joinGame(true);
+                return;
             }
+            document.getElementById("content").innerHTML = '<div id="buttons"><button id="hostName" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameMode" type="button" class="btn btn-secondary custombtn">Game Mode</button><button id="numPlayers" type="button" class="btn btn-secondary custombtn">Numbers of Players</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Leave Game</button></div>';
             document.getElementById("hostName").innerHTML = "Host: " + json.host;
             document.getElementById("gameMode").innerHTML = "Mode: " + json.mode;
             document.getElementById("numPlayers").innerHTML = "Players: " + json.players;
