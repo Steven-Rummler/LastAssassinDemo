@@ -108,8 +108,9 @@ function startLobby() {
                 joinGame("Game Creation Failed");
                 return;
             }
-            document.getElementById("content").innerHTML = '<div id="buttons"><button id="hostName" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameMode" type="button" class="btn btn-secondary custombtn">Game Mode</button><button id="numPlayers" type="button" class="btn btn-secondary custombtn">Numbers of Players</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Leave Game</button></div>';
+            document.getElementById("content").innerHTML = '<div id="buttons"><button id="hostName" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameCode" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameMode" type="button" class="btn btn-secondary custombtn">Game Mode</button><button id="numPlayers" type="button" class="btn btn-secondary custombtn">Numbers of Players</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Leave Game</button></div>';
             document.getElementById("hostName").innerHTML = "You are the Host";
+            document.getElementById("gameCode").innerHTML = "Join Code: " + json.code;
             document.getElementById("gameMode").innerHTML = "Mode: " + json.mode;
             document.getElementById("numPlayers").innerHTML = "Players: " + json.players;
             // Reset event listeners
