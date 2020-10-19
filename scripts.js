@@ -1,3 +1,5 @@
+const apiurl = 'http://stevenrummler.com/games/';
+
 function createGame() {
     // Rebuild content section
     document.getElementById("content").innerHTML = `
@@ -43,7 +45,7 @@ function joinLobby() {
     console.log(value);
     if (value === "")
         return;
-    let url = "http://localhost:8000/games/" + value;
+    let url = apiurl + value;
     // Rebuild content section
     document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Joining Game</button></div>';
     // Display API data
@@ -88,7 +90,7 @@ function startLobby() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:8000/games/", requestOptions)
+    fetch(apiurl, requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
@@ -96,7 +98,7 @@ function startLobby() {
     // Rebuild content section
     document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Joining Game</button></div>';
     // Call API
-    let url = "localhost:8000/games/" + code;
+    let url = apiurl + code;
     const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Origin': 'stevenrummler.com' });
     const myRequest = new Request(url, { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default', });
     console.log(myRequest);
