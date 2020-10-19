@@ -1,4 +1,4 @@
-const apiurl = 'https://cors-anywhere.herokuapp.com/stevenrummler.com/games/';
+const apiurl = 'https://cors-anywhere.herokuapp.com/stevenrummler.com:8000/games/';
 
 function createGame() {
     // Rebuild content section
