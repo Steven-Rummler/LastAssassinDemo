@@ -43,6 +43,10 @@
     width: auto;
 }
 
+input {
+    text-align: center;
+}
+
 .alert {
     position: fixed;
     width: 96%;
