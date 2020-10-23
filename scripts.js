@@ -22,11 +22,12 @@ function createGame() {
 
 function joinGame(error) {
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button id="demoCode" type="button" class="btn btn-secondary custombtn">Demo Code: OSNG</button><input class="form-control custombtn" id="gameCode" placeholder="Enter Game Code"><button id="joinLobby" type="button" class="btn btn-success custombtn">Join Lobby</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Main Menu</button></div>';
+    document.getElementById("content").innerHTML = '<div id="buttons"><button id="demoCode" type="button" class="btn btn-secondary custombtn">Use Demo Code</button><input class="form-control custombtn" id="gameCode" placeholder="Enter Game Code"><button id="joinLobby" type="button" class="btn btn-success custombtn">Join Lobby</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Main Menu</button></div>';
     if (typeof (error) == "string") {
         document.getElementById("gameCode").placeholder = error;
     }
     // Reset event listeners
+    document.getElementById("demoCode").addEventListener("click", demoCode);
     document.getElementById("joinLobby").addEventListener("click", joinLobby);
     document.getElementById("mainMenu").addEventListener("click", mainMenu);
 }
@@ -128,6 +129,10 @@ function makeCode(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+}
+
+function demoCode() {
+    document.getElementById("gameCode").value = "OSNG";
 }
 
 document.getElementById("createGame").addEventListener("click", createGame);
