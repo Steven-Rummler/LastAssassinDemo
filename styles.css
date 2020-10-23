@@ -48,7 +48,7 @@ input {
 }
 
 select {
-    text-align: center;
+    text-align-last: center;
 }
 
 .alert {
