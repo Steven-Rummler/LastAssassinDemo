@@ -1,20 +1,20 @@
-const apiurl = 'https://cors-anywhere.herokuapp.com/stevenrummler.com:8000/games/';
+const apiurl = 'http://stevenrummler.com:8000/games/';
 
 function createGame() {
     // Rebuild content section
     document.getElementById("content").innerHTML = `
     <div id="buttons">
-        <input class="form-control custombtn" id="hostName" placeholder="Enter Your Name">
-        <div class="form-group custombtn">
+        <input class="form-control custombtn entry" id="hostName" placeholder="Enter Your Name">
+        <div class="form-group custombtn entry">
         <select class="form-control" id="gameMode">
             <option>Classic</option>
             <option>Normal</option>
             <option>Insanity</option>
         </select>
         </div>
-        <button id="create" type="button" class="btn btn-success custombtn">Create</button>
-        <button id="mainMenu" type="button" class="btn btn-danger custombtn">Main Menu</button>
-    </div>`
+        <button id="create" type="button" class="btn custombtn action">Create</button>
+        <button id="mainMenu" type="button" class="btn custombtn exit">Main Menu</button>
+    </div>`;
     // Reset event listeners
     document.getElementById("create").addEventListener("click", startLobby);
     document.getElementById("mainMenu").addEventListener("click", mainMenu);
@@ -22,7 +22,13 @@ function createGame() {
 
 function joinGame(error) {
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button id="demoCode" type="button" class="btn btn-secondary custombtn">Use Demo Code</button><input class="form-control custombtn" id="gameCode" placeholder="Enter Game Code"><button id="joinLobby" type="button" class="btn btn-success custombtn">Join Lobby</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Main Menu</button></div>';
+    document.getElementById("content").innerHTML = `
+    <div id="buttons">
+        <button id="demoCode" type="button" class="btn action custombtn">Use Demo Code</button>
+        <input class="form-control custombtn entry" id="gameCode" placeholder="Enter Game Code">
+        <button id="joinLobby" type="button" class="btn action custombtn">Join Lobby</button>
+        <button id="mainMenu" type="button" class="btn exit custombtn">Main Menu</button>
+    </div>`;
     if (typeof (error) == "string") {
         document.getElementById("gameCode").placeholder = error;
     }
@@ -34,7 +40,11 @@ function joinGame(error) {
 
 function mainMenu() {
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button id="createGame" type="button" class="btn btn-success custombtn">Create Game</button><button id="joinGame" type="button" class="btn btn-success custombtn">Join Game</button></div>'
+    document.getElementById("content").innerHTML = `
+    <div id="buttons">
+        <button id="createGame" type="button" class="btn action custombtn">Create Game</button>
+        <button id="joinGame" type="button" class="btn action custombtn">Join Game</button>
+    </div>`;
     // Reset event listeners
     document.getElementById("createGame").addEventListener("click", createGame);
     document.getElementById("joinGame").addEventListener("click", joinGame);
@@ -48,7 +58,10 @@ function joinLobby() {
         return;
     let url = apiurl + value;
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Joining Game</button></div>';
+    document.getElementById("content").innerHTML = `
+    <div id="buttons">
+        <button type="button" class="btn info custombtn">Joining Game</button>
+    </div>`;
     // Display API data
     const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Origin': 'stevenrummler.com' });
     const myRequest = new Request(url, { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default', });
@@ -61,7 +74,13 @@ function joinLobby() {
                 joinGame("Invalid Code");
                 return;
             }
-            document.getElementById("content").innerHTML = '<div id="buttons"><button id="hostName" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameMode" type="button" class="btn btn-secondary custombtn">Game Mode</button><button id="numPlayers" type="button" class="btn btn-secondary custombtn">Numbers of Players</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Leave Game</button></div>';
+            document.getElementById("content").innerHTML = `
+            <div id="buttons">
+                <button id="hostName" type="button" class="btn info custombtn">Host Name</button>
+                <button id="gameMode" type="button" class="btn info custombtn">Game Mode</button>
+                <button id="numPlayers" type="button" class="btn info custombtn">Numbers of Players</button>
+                <button id="mainMenu" type="button" class="btn exit custombtn">Leave Game</button>
+            </div>`;
             document.getElementById("hostName").innerHTML = "Host: " + json.host;
             document.getElementById("gameMode").innerHTML = "Mode: " + json.mode;
             document.getElementById("numPlayers").innerHTML = "Players: " + json.players;
@@ -76,7 +95,10 @@ function startLobby() {
     let host = document.getElementById("hostName").value;
     let mode = document.getElementById("gameMode").value;
     // Go to the loading screen
-    document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Creating Game</button></div>';
+    document.getElementById("content").innerHTML = `
+    <div id="buttons">
+        <button type="button" class="btn info custombtn">Creating Game</button>
+    </div>`;
     // Create the new game
     let createHeaders = new Headers();
     createHeaders.append("Content-Type", "application/json");
@@ -97,7 +119,10 @@ function startLobby() {
         .catch(error => console.log('error', error));
 
     // Rebuild content section
-    document.getElementById("content").innerHTML = '<div id="buttons"><button type="button" class="btn btn-secondary custombtn">Joining Game</button></div>';
+    document.getElementById("content").innerHTML = `
+    <div id="buttons">
+        <button type="button" class="btn info custombtn">Joining Game</button>
+    </div>`;
     // Call API
     let url = apiurl + code;
     const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Origin': 'stevenrummler.com' });
@@ -111,7 +136,13 @@ function startLobby() {
                 joinGame("Game Creation Failed");
                 return;
             }
-            document.getElementById("content").innerHTML = '<div id="buttons"><button id="hostName" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameCode" type="button" class="btn btn-secondary custombtn">Host Name</button><button id="gameMode" type="button" class="btn btn-secondary custombtn">Game Mode</button><button id="numPlayers" type="button" class="btn btn-secondary custombtn">Numbers of Players</button><button id="mainMenu" type="button" class="btn btn-danger custombtn">Leave Game</button></div>';
+            document.getElementById("content").innerHTML = `<div id="buttons">
+                <button id="hostName" type="button" class="btn info custombtn">Host Name</button>
+                <button id="gameCode" type="button" class="btn info custombtn">Host Name</button>
+                <button id="gameMode" type="button" class="btn info custombtn">Game Mode</button>
+                <button id="numPlayers" type="button" class="btn info custombtn">Numbers of Players</ button>
+                <button id="mainMenu" type="button" class="btn exit custombtn">Leave Game</button>
+            </div>`;
             document.getElementById("hostName").innerHTML = "You are the Host";
             document.getElementById("gameCode").innerHTML = "Join Code: " + json.code;
             document.getElementById("gameMode").innerHTML = "Mode: " + json.mode;

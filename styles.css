@@ -2,12 +2,30 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Assassin';
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-image: url('wedge.svg');
+    background-size: 100% 100%;
+}
+
+@font-face {
+    font-family: 'Assassin';
+    src: URL('assassin.ttf') format('truetype');
+  }
+
 #page_title {
-    background-color: #343A40;
-    color: cornsilk;
-    padding: 5px;
+    background-color: #575757;
+    color: white;
+    font-family: 'Assassin';
+    padding: none;
+    padding-top: 5px;
     text-align: center;
     height: 80px;
     display: flex;
@@ -17,10 +35,9 @@
 }   
 
 #content {
-    background-color: blueviolet;
     position: absolute;
     top: 80px;
-    bottom: 50px;
+    bottom: 0px;
     left: 0;
     width: 100%;
 }
@@ -29,6 +46,7 @@
     text-align: center;
     display: flex;
     height: 100%;
+    padding-bottom: 10%;
     justify-content: center;
     align-content: center;
     flex-direction: column;
@@ -36,19 +54,44 @@
 
 .custombtn {
     position: relative;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
     width: auto;
+    font-size: 1.8rem;
+}
+
+.entry {
+    font-size: 1.8rem;
+}
+
+.action {
+    background-color: #6c090c;
+    color: white;
+}
+
+.exit {
+    color: white;
+    background-color: #c72123;
+}
+
+.info {
+    color: white;
+    background-color: #575757;
+}
+
+option {
+    font-size: 1.8rem;
 }
 
 input {
     text-align: center;
 }
 
-select {
+.form-control {
     text-align-last: center;
+    font-size: 1.8rem;
 }
 
 .alert {
@@ -63,7 +106,7 @@ select {
     width: 100%;
     position: fixed;
     bottom: 0;
-    display: flex;
+    display: none;
     width: 100%;
     justify-content: flex-end;
     color: white;
