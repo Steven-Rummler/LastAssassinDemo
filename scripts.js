@@ -156,17 +156,116 @@ function startLobby() {
 }
 
 function startGame() {
-    console.log('game has started...')
+    
+    // document.body.style.background = '#c1c5cd'; 
     
     // Rebuild content section
     document.getElementById("content").innerHTML = `
-    <div id="buttons">
-        <button type="button" class="btn info custombtn">
-        Your target is ...
-        <span class="targetName">STEFAN</span>
-        </button>
-    </div>`;
+    <div class="gameDetails">
+        <div>
+            Your target:
+            <span id="nameDetail" class="detail">STEFAN</span>
+        </div>
+        <div>Kills: <span id="killsDetail" class="detail">0</span></div>
+        <div>Targets Remaining: <span id="targetsDetail" class="detail">5</span></div>
+    </div>
+
+    <div id="powerMessage" class="powerMessage">
+        Message goes here
+        <span id="timer">30s</span>
+    </div>
+
+    <?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 477.883 477.883" style="enable-background:new 0 0 477.883 477.883;" xml:space="preserve"><g>	<g>		<path d="M468.456,1.808c-4.811-2.411-10.478-2.411-15.289,0l0,0L9.433,223.675c-8.429,4.219-11.842,14.471-7.624,22.9			c2.401,4.798,6.919,8.188,12.197,9.151l176.111,32.034l32.034,176.111c1.311,7.219,7.091,12.793,14.353,13.841			c0.803,0.116,1.613,0.173,2.423,0.171c6.469,0.003,12.383-3.651,15.275-9.438L476.07,24.711			C480.292,16.284,476.883,6.03,468.456,1.808z"/>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+
+    <div id='taggedbtn' class="taggedbtn">Assassinated</div>
+
+    <div id="map" class="map">
+        <div id="myMarker" class="marker me"></div>
+        <div id="targetMarker" class="marker target"></div>
+    </div>
+
+    <div id="powerups" class="powerups">
+        <div id="power5" class="power">E</div>
+        <div id="power4" class="power">D</div>
+        <div id="power3" class="power">C</div>
+        <div id="power2" class="power">B</div>
+        <div id="power1" class="power">A</div>
+    </div>
+    `;
+
+    el = document.getElementById('powerMessage');
+    el.classList.add('hide');
+    el.classList.remove('show');
+
+    document.getElementById('myMarker').style.left = '4.6rem'
+    document.getElementById('myMarker').style.bottom = '4.6rem'
+
+    document.getElementById('targetMarker').style.left = '8rem'
+    document.getElementById('targetMarker').style.bottom = '8rem'
+
+    document.getElementById("power1").addEventListener("click", power1);
+    document.getElementById("power2").addEventListener("click", power2);
+    document.getElementById("power3").addEventListener("click", power3);
+    document.getElementById("power4").addEventListener("click", power4);
+    document.getElementById("power5").addEventListener("click", power5);
+
+    document.getElementById('power1').classList.add('available');
+    document.getElementById('power2').classList.add('available');
 }
+
+function power1() {
+
+    document.getElementById('power1').classList.remove('available');
+    document.getElementById('powerMessage').innerHTML = "Invisibility\t<span id=\"timer\"></span>";
+    
+    el = document.getElementById('powerMessage');
+    el.classList.add('show');
+    el.classList.remove('hide');
+
+    seconds = 5;
+    countdown(seconds);
+}
+
+function power2() {
+    document.getElementById('power2').classList.remove('available');
+    document.getElementById('nameDetail').innerHTML = "Trent";
+    kills = document.getElementById('killsDetail').innerHTML;
+    targets = document.getElementById('targetsDetail').innerHTML
+    document.getElementById('killsDetail').innerHTML = Number(kills) + 1;
+    document.getElementById('targetsDetail').innerHTML = Number(targets) - 1;
+
+    document.getElementById('powerMessage').innerHTML = "Nice Work!";
+    el = document.getElementById('powerMessage');
+    el.classList.add('show');
+    el.classList.remove('hide');
+
+    seconds = 3;
+    var countdown = setInterval(function() {
+        seconds--;
+        if (seconds <= 0) {
+            clearInterval(countdown);
+            el = document.getElementById('powerMessage');
+            el.classList.add('hide');
+            el.classList.remove('show'); 
+        };
+    }, 1000);    
+}
+
+function countdown(seconds) {
+    document.getElementById('timer').innerHTML = seconds;
+    
+    var countdown = setInterval(function() {
+        seconds--;
+        document.getElementById("timer").textContent = seconds;
+        if (seconds <= 0) {
+            clearInterval(countdown);
+            el = document.getElementById('powerMessage');
+            el.classList.add('hide');
+            el.classList.remove('show'); 
+        };
+    }, 1000);    
+
+  }
 
 function makeCode(length) {
     let result = '';
