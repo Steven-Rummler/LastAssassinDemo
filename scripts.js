@@ -76,6 +76,7 @@ function joinLobby() {
             }
             document.getElementById("content").innerHTML = `
             <div id="buttons">
+                <div id="message" class="message">Waiting For Host To Start The Game...</div>
                 <button id="hostName" type="button" class="btn info custombtn">Host Name</button>
                 <button id="gameMode" type="button" class="btn info custombtn">Game Mode</button>
                 <button id="numPlayers" type="button" class="btn info custombtn">Numbers of Players</button>
@@ -141,6 +142,7 @@ function startLobby() {
                 <button id="gameCode" type="button" class="btn info custombtn">Host Name</button>
                 <button id="gameMode" type="button" class="btn info custombtn">Game Mode</button>
                 <button id="numPlayers" type="button" class="btn info custombtn">Numbers of Players</ button>
+                <button id="startBtn" type="button" class="btn start custombtn">Start Game</button>
                 <button id="mainMenu" type="button" class="btn exit custombtn">Leave Game</button>
             </div>`;
             document.getElementById("hostName").innerHTML = "You are the Host";
@@ -149,7 +151,21 @@ function startLobby() {
             document.getElementById("numPlayers").innerHTML = "Players: " + json.players;
             // Reset event listeners
             document.getElementById("mainMenu").addEventListener("click", mainMenu);
+            document.getElementById("startBtn").addEventListener("click", startGame);
         });
+}
+
+function startGame() {
+    console.log('game has started...')
+    
+    // Rebuild content section
+    document.getElementById("content").innerHTML = `
+    <div id="buttons">
+        <button type="button" class="btn info custombtn">
+        Your target is ...
+        <span class="targetName">STEFAN</span>
+        </button>
+    </div>`;
 }
 
 function makeCode(length) {
