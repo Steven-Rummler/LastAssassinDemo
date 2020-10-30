@@ -56,7 +56,7 @@ function joinLobby() {
     console.log(value);
     if (value === "")
         return;
-    let url = apiurl + value;
+    let url = apiurl + value + "/";
     // Rebuild content section
     document.getElementById("content").innerHTML = `
     <div id="buttons">
@@ -125,7 +125,7 @@ function startLobby() {
         <button type="button" class="btn info custombtn">Joining Game</button>
     </div>`;
     // Call API
-    let url = apiurl + code;
+    let url = apiurl + code + "/";
     const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Origin': 'stevenrummler.com' });
     const myRequest = new Request(url, { method: 'GET', headers: myHeaders, mode: 'cors', cache: 'default', });
     console.log(myRequest);
