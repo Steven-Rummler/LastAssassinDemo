@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <title>Last Assassin</title>
+</head>
+
+<body>
+    <div id="page_title">
+        <h1>LAST ASSASSIN</h1>
+    </div>
+
+    <div id="content">
+        <h2 id="coordinates"></h2>
+        <h2>Number of calls: <span id="calls"></span></h2>
+
+        <script>
+        let calls = 0
+        let x = document.getElementById("coordinates");
+        let y = document.getElementById("calls");
+
+        function callLocation() {
+            calls = calls + 1;
+            y.innerHTML = calls;
+            getLocation()
+            setTimeout(callLocation, 10000);
+        }
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showPosition);
+            } else { 
+                x.innerHTML = "Sorry";
+            }
+        }
+            
+        function showPosition(position) {
+            x.innerHTML="Latitude: " + position.coords.latitude + 
+            "<br>Longitude: " + position.coords.longitude;
+        }
+
+        callLocation()
+        </script>
+    </div>
+
+    <div id="alert" class="alert alert-warning" role="alert">
+        We recommend using a phone to play this game.
+    </div>
+
+    <div id="footer-div" class="navbar-dark bg-dark">
+        <p id="name" class="footer-item nav-link">Steven Rummler</p>
+        <p id="name" class="footer-item nav-link">Bryce Rummler</p>
+        <a class="footer-item nav-link" href="https://github.com/Steven-Rummler/LastAssassinDemo">GitHub</a>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
