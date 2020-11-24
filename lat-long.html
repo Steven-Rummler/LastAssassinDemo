@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
     <title>Last Assassin</title>
 </head>
@@ -27,7 +27,7 @@
             calls = calls + 1;
             y.innerHTML = calls;
             getLocation()
-            setTimeout(callLocation, 10000);
+            setTimeout(callLocation, 1000);
         }
         function getLocation() {
             if (navigator.geolocation) {
@@ -51,12 +51,10 @@
     </div>
 
     <div id="footer-div" class="navbar-dark bg-dark">
-        <p id="name" class="footer-item nav-link">Steven Rummler</p>
-        <p id="name" class="footer-item nav-link">Bryce Rummler</p>
         <a class="footer-item nav-link" href="https://github.com/Steven-Rummler/LastAssassinDemo">GitHub</a>
     </div>
 
-    <script src="scripts.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

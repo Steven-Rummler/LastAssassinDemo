@@ -1,6 +1,8 @@
 let player_info = {
   tags: 0,
   target: "",
+  lat: 0,
+  long: 0,
   powers: {
     radar_jam: 0,
     invincible: 0,
