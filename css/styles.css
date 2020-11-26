@@ -139,17 +139,13 @@ input {
 }
 
 .taggedbtn {
-  height: 4rem;
-  width: 10rem;
   position: absolute;
+  padding: 1rem;
   left: 0.8rem;
-  bottom: 11.6rem;
+  bottom: 0.8rem;
   border-radius: 0.5rem;
-  background-color: #6c090c;
-  color: white;
   text-align: center;
   vertical-align: center;
-  line-height: 4rem;
   font-size: 1.8rem;
 }
 
@@ -205,8 +201,12 @@ input {
   background-color: #0c6c0957;
 }
 
-#arrow {
+.compass {
   max-width: 100px;
+  height: 100px;
+  color: white;
+  text-align: center;
+  line-height: 100px;
   position: absolute;
   top: 40%;
   left: 0;
@@ -291,7 +291,7 @@ input {
 
 /* mobile styles*/
 @media only screen and (max-width: 400px) {
-  .alert {
+  #alert {
     display: none;
   }
 
@@ -302,14 +302,14 @@ input {
 
 /* Tablet Styles */
 @media only screen and (min-width: 401px) and (max-width: 960px) {
-  .alert {
+  #alert {
     display: none;
   }
 }
 
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
-  .alert {
+  #alert {
     display: block;
   }
 }

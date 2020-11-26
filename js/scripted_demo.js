@@ -1,8 +1,6 @@
 let player_info = {
   tags: 0,
   target: "",
-  lat: 0,
-  long: 0,
   powers: {
     radar_jam: 0,
     invincible: 0,
@@ -25,6 +23,10 @@ let games = {
 };
 
 let player = "";
+
+let direction = 0;
+let momentum = 0;
+let distance = 60;
 
 function createGame() {
   // Rebuild content section
@@ -50,8 +52,8 @@ function joinGame(error) {
   // Rebuild content section
   document.getElementById("content").innerHTML = `
     <div id="buttons">
+        <button id="demoCode" type="button" class="btn action custombtn">Use Demo Info</button>
         <input class="form-control custombtn entry" id="playerName" placeholder="Enter Player Name">
-        <button id="demoCode" type="button" class="btn action custombtn">Use Demo Code</button>
         <input class="form-control custombtn entry" id="gameCode" placeholder="Enter Game Code">
         <button id="joinLobby" type="button" class="btn action custombtn">Join Lobby</button>
         <button id="mainMenu" type="button" class="btn exit custombtn">Main Menu</button>
@@ -172,7 +174,11 @@ function startGame() {
             <span id="nameDetail" class="detail">STEFAN</span>
         </div>
         <div>Kills: <span id="killsDetail" class="detail">0</span></div>
-        <div>Targets Remaining: <span id="targetsDetail" class="detail">5</span></div>
+        <div>Targets Remaining: <span id="targetsDetail" class="detail">3</span></div>
+    </div>
+
+    <div id="instructions" class="alert alert-warning" role="alert">
+        Hit Power 'B' to 'tag someone'. This is a user experience demo, functionality is limited. Thanks for your help!
     </div>
 
     <div id="powerMessage" class="powerMessage">
@@ -180,14 +186,11 @@ function startGame() {
         <span id="timer">30s</span>
     </div>
 
-    <?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 477.883 477.883" style="enable-background:new 0 0 477.883 477.883;" xml:space="preserve"><g>	<g>		<path d="M468.456,1.808c-4.811-2.411-10.478-2.411-15.289,0l0,0L9.433,223.675c-8.429,4.219-11.842,14.471-7.624,22.9			c2.401,4.798,6.919,8.188,12.197,9.151l176.111,32.034l32.034,176.111c1.311,7.219,7.091,12.793,14.353,13.841			c0.803,0.116,1.613,0.173,2.423,0.171c6.469,0.003,12.383-3.651,15.275-9.438L476.07,24.711			C480.292,16.284,476.883,6.03,468.456,1.808z"/>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+    <?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" class="compass" id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 477.883 477.883" style="enable-background:new 0 0 477.883 477.883;" xml:space="preserve"><g>	<g>		<path d="M468.456,1.808c-4.811-2.411-10.478-2.411-15.289,0l0,0L9.433,223.675c-8.429,4.219-11.842,14.471-7.624,22.9			c2.401,4.798,6.919,8.188,12.197,9.151l176.111,32.034l32.034,176.111c1.311,7.219,7.091,12.793,14.353,13.841			c0.803,0.116,1.613,0.173,2.423,0.171c6.469,0.003,12.383-3.651,15.275-9.438L476.07,24.711			C480.292,16.284,476.883,6.03,468.456,1.808z"/>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
 
-    <div id='taggedbtn' class="taggedbtn">Assassinated</div>
+    <div class="compass" id="distance">60m</div>
 
-    <div id="map" class="map">
-        <div id="myMarker" class="marker me"></div>
-        <div id="targetMarker" class="marker target"></div>
-    </div>
+    <div id='taggedbtn' class="taggedbtn action">I was Assassinated</div>
 
     <div id="powerups" class="powerups">
         <div id="power5" class="power">E</div>
@@ -202,20 +205,52 @@ function startGame() {
   el.classList.add("hide");
   el.classList.remove("show");
 
-  document.getElementById("myMarker").style.left = "4.6rem";
-  document.getElementById("myMarker").style.bottom = "4.6rem";
-
-  document.getElementById("targetMarker").style.left = "8rem";
-  document.getElementById("targetMarker").style.bottom = "8rem";
-
   document.getElementById("power1").addEventListener("click", power1);
   document.getElementById("power2").addEventListener("click", power2);
   document.getElementById("power3").addEventListener("click", power3);
   document.getElementById("power4").addEventListener("click", power4);
   document.getElementById("power5").addEventListener("click", power5);
 
+  document.getElementById("taggedbtn").addEventListener("click", dead);
+
+  document.getElementById("instructions").addEventListener("click", () => {
+    document.getElementById("instructions").remove();
+  });
+
   document.getElementById("power1").classList.add("available");
   document.getElementById("power2").classList.add("available");
+
+  let arrow = document.getElementById("arrow");
+  let range = document.getElementById("distance");
+
+  setInterval(() => {
+    direction += getRandomInt(-5, 10);
+    if (momentum > 4) {
+      momentum -= 1;
+    }
+    if (momentum < -4) {
+      momentum += 1;
+    }
+    if (distance < 10) {
+      momentum = 0;
+    }
+    if (distance < 30) {
+      momentum += getRandomInt(-1, 3);
+    } else if (distance < 60) {
+      momentum += getRandomInt(-2, 3);
+    } else {
+      momentum += getRandomInt(-2, 2);
+    }
+    distance += momentum;
+    arrow.style.transform = "rotate(" + Math.trunc(direction) + "deg)";
+    range.innerText = distance + "m";
+  }, 1000);
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 function power1() {
@@ -256,6 +291,14 @@ function power2() {
   }, 1000);
 }
 
+function dead() {
+  let taggedbtn = document.getElementById("taggedbtn");
+  taggedbtn.removeEventListener("click", dead);
+  taggedbtn.innerText = "On Ben's Team";
+  taggedbtn.classList.add("info");
+  taggedbtn.classList.remove("action");
+}
+
 function countdown(seconds) {
   document.getElementById("timer").innerHTML = seconds;
 
@@ -283,6 +326,7 @@ function makeCode(length) {
 
 function demoCode() {
   document.getElementById("gameCode").value = "OSNG";
+  document.getElementById("playerName").value = "Steven";
 }
 
 document.getElementById("createGame").addEventListener("click", createGame);
