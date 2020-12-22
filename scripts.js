@@ -121,9 +121,20 @@ function startLobby() {
 
     // Rebuild content section
     document.getElementById("content").innerHTML = `
-    <div id="buttons">
+    <div class="preloader">
+        <svg id="ninjastar" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 0L122.451 69.0983H195.106L136.327 111.803L158.779 180.902L100 138.197L41.2215 180.902L63.6729 111.803L4.89435 69.0983H77.5486L100 0Z" fill="#6C090C"/>
+        <path d="M100 0L122.451 69.0983H195.106L136.327 111.803L158.779 180.902L100 138.197L41.2215 180.902L63.6729 111.803L4.89435 69.0983H77.5486L100 0Z" stroke="#6C090C"/>
+        <circle cx="73" cy="62" r="20" fill="#e9eef3"/>
+        <circle cx="56" cy="114" r="20" fill="#e9eef3"/>
+        <circle cx="128" cy="62" r="20" fill="#e9eef3"/>
+        <circle cx="99.5" cy="100.5" r="12.5" fill="#e9eef3"/>
+        <circle cx="100" cy="148" r="20" fill="#e9eef3"/>
+        <circle cx="144" cy="114" r="20" fill="#e9eef3"/>
+        </svg>
         <button type="button" class="btn info custombtn">Joining Game</button>
     </div>`;
+
     // Call API
     let url = apiurl + code + "/";
     const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Origin': 'stevenrummler.com' });
@@ -174,6 +185,8 @@ function startGame() {
         Message goes here
         <span id="timer">30s</span>
     </div>
+
+
 
     <?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><svg version="1.1" id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 477.883 477.883" style="enable-background:new 0 0 477.883 477.883;" xml:space="preserve"><g>	<g>		<path d="M468.456,1.808c-4.811-2.411-10.478-2.411-15.289,0l0,0L9.433,223.675c-8.429,4.219-11.842,14.471-7.624,22.9			c2.401,4.798,6.919,8.188,12.197,9.151l176.111,32.034l32.034,176.111c1.311,7.219,7.091,12.793,14.353,13.841			c0.803,0.116,1.613,0.173,2.423,0.171c6.469,0.003,12.383-3.651,15.275-9.438L476.07,24.711			C480.292,16.284,476.883,6.03,468.456,1.808z"/>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
 
