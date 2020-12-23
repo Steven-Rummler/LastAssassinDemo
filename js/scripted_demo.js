@@ -95,9 +95,19 @@ function joinLobby(code, playerName) {
 
   // Rebuild content section
   document.getElementById("content").innerHTML = `
-    <div id="buttons">
-        <button type="button" class="btn info custombtn">Joining Game</button>
-    </div>`;
+  <div class="preloader">
+    <svg id="ninjastar" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 0L122.451 69.0983H195.106L136.327 111.803L158.779 180.902L100 138.197L41.2215 180.902L63.6729 111.803L4.89435 69.0983H77.5486L100 0Z" fill="#6C090C"/>
+    <path d="M100 0L122.451 69.0983H195.106L136.327 111.803L158.779 180.902L100 138.197L41.2215 180.902L63.6729 111.803L4.89435 69.0983H77.5486L100 0Z" stroke="#6C090C"/>
+    <circle cx="73" cy="62" r="20" fill="#e9eef3"/>
+    <circle cx="56" cy="114" r="20" fill="#e9eef3"/>
+    <circle cx="128" cy="62" r="20" fill="#e9eef3"/>
+    <circle cx="99.5" cy="100.5" r="12.5" fill="#e9eef3"/>
+    <circle cx="100" cy="148" r="20" fill="#e9eef3"/>
+    <circle cx="144" cy="114" r="20" fill="#e9eef3"/>
+    </svg>
+    <button type="button" class="btn info custombtn">Joining Game</button>
+  </div>`;
   console.log(games, code);
   setTimeout(function () {
     let content = '<div id="buttons">';
@@ -139,9 +149,19 @@ function startLobby() {
   let gameMode = document.getElementById("gameMode").value;
   // Go to the loading screen
   document.getElementById("content").innerHTML = `
-    <div id="buttons">
-        <button type="button" class="btn info custombtn">Creating Game</button>
-    </div>`;
+  <div class="preloader">
+    <svg id="ninjastar" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 0L122.451 69.0983H195.106L136.327 111.803L158.779 180.902L100 138.197L41.2215 180.902L63.6729 111.803L4.89435 69.0983H77.5486L100 0Z" fill="#6C090C"/>
+    <path d="M100 0L122.451 69.0983H195.106L136.327 111.803L158.779 180.902L100 138.197L41.2215 180.902L63.6729 111.803L4.89435 69.0983H77.5486L100 0Z" stroke="#6C090C"/>
+    <circle cx="73" cy="62" r="20" fill="#e9eef3"/>
+    <circle cx="56" cy="114" r="20" fill="#e9eef3"/>
+    <circle cx="128" cy="62" r="20" fill="#e9eef3"/>
+    <circle cx="99.5" cy="100.5" r="12.5" fill="#e9eef3"/>
+    <circle cx="100" cy="148" r="20" fill="#e9eef3"/>
+    <circle cx="144" cy="114" r="20" fill="#e9eef3"/>
+    </svg>
+    <button type="button" class="btn info custombtn">Creating Game</button>
+  </div>`;
   // Create the new game
   if (code in games) {
     console.log("Game already exists, joining game.");
