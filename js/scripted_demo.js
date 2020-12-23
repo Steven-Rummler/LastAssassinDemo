@@ -225,20 +225,30 @@ function startGame() {
 
     <div id='taggedbtn' class="taggedbtn action">I was Assassinated</div>
 
+    <div id="powerUpsTab">Power-Ups</div>
     <div id="powerups" class="powerups">
-        <div id="power5" class="power">E</div>
-        <div id="power4" class="power">D</div>
-        <div id="power3" class="power">C</div>
-        <div id="power2" class="power">B</div>
-        <div id="power1" class="power">A</div>
+      <div id="power1" class="power">Stealth Mode</div>
+      <div id="power2" class="power">Invincible</div>
+      <div id="power3" class="power">All Seeing</div>
+      <div id="power4" class="power">Spider Sense</div>
     </div>
+
     `;
+
+  //   <div id="powerups" class="powerups">
+  //     <div id="power5" class="power">E</div>
+  //     <div id="power4" class="power">D</div>
+  //     <div id="power3" class="power">C</div>
+  //     <div id="power2" class="power">B</div>
+  //     <div id="power1" class="power">A</div>
+  // </div>
 
   el = document.getElementById("powerMessage");
   el.classList.add("hide");
   el.classList.remove("show");
 
   document.getElementById("tutorialbtn").addEventListener("click", tutorial);
+  document.getElementById("powerUpsTab").addEventListener("click", showPowerups);
 
   document.getElementById("power1").addEventListener("click", power1);
   document.getElementById("power2").addEventListener("click", power2);
@@ -286,6 +296,24 @@ function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function showPowerups() {
+  pu = document.getElementById("powerups");
+  put = document.getElementById("powerUpsTab");
+  
+  if(pu.classList.contains("animateSlideIn")){
+    pu.classList.remove("animateSlideIn");
+    pu.classList.add("animateSlideOut");
+    put.classList.remove("animateSlideIn2");
+    put.classList.add("animateSlideOut2");
+  }
+  else {
+    pu.classList.remove("animateSlideOut");
+    pu.classList.add("animateSlideIn");
+    put.classList.remove("animateSlideOut2");
+    put.classList.add("animateSlideIn2");
+  }
 }
 
 function overlayOff() {
@@ -359,7 +387,7 @@ function power2() {
   document.getElementById("killsDetail").innerHTML = Number(kills) + 1;
   document.getElementById("targetsDetail").innerHTML = Number(targets) - 1;
 
-  document.getElementById("powerMessage").innerHTML = "Nice Work!";
+  document.getElementById("powerMessage").innerHTML = "You're Invincible!";
   el = document.getElementById("powerMessage");
   el.classList.add("show");
   el.classList.remove("hide");
