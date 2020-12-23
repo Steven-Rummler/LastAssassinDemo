@@ -22,6 +22,15 @@ let games = {
   },
 };
 
+let tutorialMessages = [
+  "Welcome to Last Assassin", 
+  "The goal of the game is to eliminate all your targets",
+  "When you eliminate a target, you are assigned a new target",
+  "The game ends when there is only one player left",
+  "The assassin with the most kills wins the game"
+]
+let message = 0;
+
 let player = "";
 
 let direction = 0;
@@ -184,7 +193,10 @@ function startLobby() {
 }
 
 function startGame() {
-  // document.body.style.background = '#c1c5cd';
+  // If we don't need the game title here, should we remove it to save screen space ? 
+  pt = document.getElementById("page_title");
+  pt.classList.add("hide");
+  document.getElementById("content").style.top = 0;
 
   // Rebuild content section
   document.getElementById("content").innerHTML = `
@@ -195,6 +207,7 @@ function startGame() {
         </div>
         <div>Kills: <span id="killsDetail" class="detail">0</span></div>
         <div>Targets Remaining: <span id="targetsDetail" class="detail">3</span></div>
+        <div id="tutorialbtn">?</div>
     </div>
 
     <div id="instructions" class="alert alert-warning" role="alert">
@@ -224,6 +237,8 @@ function startGame() {
   el = document.getElementById("powerMessage");
   el.classList.add("hide");
   el.classList.remove("show");
+
+  document.getElementById("tutorialbtn").addEventListener("click", tutorial);
 
   document.getElementById("power1").addEventListener("click", power1);
   document.getElementById("power2").addEventListener("click", power2);
@@ -271,6 +286,56 @@ function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function overlayOff() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+function overlayOn() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function tutorial() {
+  overlayOn();
+  document.getElementById("tutorialText").innerHTML = tutorialMessages[message];
+}
+
+function nextMessage() {
+  
+  if(tutorialMessages[message + 1]){
+    message += 1;
+    document.getElementById("tutorialText").innerHTML = tutorialMessages[message];
+    
+    la = document.getElementById("leftArrow");
+    la.classList.add("show");
+    la.classList.remove("hide");
+
+    if(! tutorialMessages[message + 1]){
+      ra = document.getElementById("rightArrow");
+      ra.classList.add("hide");
+      ra.classList.remove("show");
+    }
+  }
+
+}
+
+function previousMessage() {
+  if(tutorialMessages[message - 1]){
+    message -= 1;
+    document.getElementById("tutorialText").innerHTML = tutorialMessages[message];
+
+    ra = document.getElementById("rightArrow");
+    ra.classList.add("show");
+    ra.classList.remove("hide");
+
+    if(! tutorialMessages[message - 1]){
+      la = document.getElementById("leftArrow");
+      la.classList.add("hide");
+      la.classList.remove("show");
+    }
+  }
+
 }
 
 function power1() {

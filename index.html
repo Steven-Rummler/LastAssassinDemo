@@ -2,16 +2,27 @@
 <html>
 
 <head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <meta charset="utf-8">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css" />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-    <title>Last Assassin</title>
+
     <link rel="icon" href="media/favicon.ico"/>
+
+    <title>Last Assassin</title>
 </head>
 
 <body>
     <div id="page_title">
         <h1>LAST ASSASSIN</h1>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div id="leftArrow" class="leftArrow" onclick="previousMessage()">◁</div>
+        <div id="tutorialText"></div>
+        <div id="rightArrow" class="rightArrow" onclick="nextMessage()">▷</div>
+        <div id="closeTutorial" onclick="overlayOff()">X</div>
     </div>
 
     <div id="content">
