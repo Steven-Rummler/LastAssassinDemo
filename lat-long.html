@@ -17,18 +17,26 @@
     <div id="content">
         <h2 id="coordinates"></h2>
         <h2>Number of calls: <span id="calls"></span></h2>
+        <br>
+        <h2>Destination: BYU</h2>
+        <h2>Direction to target: <span id="direction"></span></h2>
+        <h2>Distance: <span id="distance"></span></h2>
 
         <script>
-        let calls = 0
+        let calls = 0;
         let x = document.getElementById("coordinates");
-        let y = document.getElementById("calls");
+        let z = document.getElementById("direction");
+        let d = document.getElementById("distance");
 
         function callLocation() {
+            let y = document.getElementById("calls");
+
             calls = calls + 1;
             y.innerHTML = calls;
-            getLocation()
-            setTimeout(callLocation, 1000);
+            getLocation();
+            setTimeout(callLocation, 10000);
         }
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(showPosition);
@@ -40,9 +48,60 @@
         function showPosition(position) {
             x.innerHTML="Latitude: " + position.coords.latitude + 
             "<br>Longitude: " + position.coords.longitude;
+            z.innerHTML = bearing(position.coords.latitude, position.coords.longitude, 40.2518, -111.6493);
+            d.innerHTML = Math.round(distance(position.coords.latitude, position.coords.longitude, 40.2518, -111.6493)) + " meters";
         }
 
-        callLocation()
+
+        function toRadians(degrees) {
+            return degrees * Math.PI / 180;
+        }
+        
+        function toDegrees(radians) {
+            return radians * 180 / Math.PI;
+        }
+
+        function distance(lat1, lon1, lat2, lon2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = toRadians(lat2-lat1);  // deg2rad below
+            var dLon = toRadians(lon2-lon1); 
+            var a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2)
+                ; 
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            var d1 = (R * c) * 1000; // Distance in meters
+            return d1;
+        }
+
+
+        function bearing(startLat, startLng, destLat, destLng){
+            startLat = toRadians(startLat);
+            startLng = toRadians(startLng);
+            destLat = toRadians(destLat);
+            destLng = toRadians(destLng);
+
+            y = Math.sin(destLng - startLng) * Math.cos(destLat);
+            x = Math.cos(startLat) * Math.sin(destLat) -
+                Math.sin(startLat) * Math.cos(destLat) * Math.cos(destLng - startLng);
+            brng = Math.atan2(y, x);
+            brng = toDegrees(brng);
+
+            brng = (brng + 360) % 360;
+
+            var bearings = ["NE", "E", "SE", "S", "SW", "W", "NW", "N"];
+            var index = brng - 22.5;
+            if (index < 0){
+                index += 360;
+            }
+            index = parseInt(index / 45);
+
+            return(bearings[index]);         
+        }
+
+        callLocation();
+
         </script>
     </div>
 

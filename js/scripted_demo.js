@@ -225,7 +225,7 @@ function startGame() {
 
     <div id='taggedbtn' class="taggedbtn action">I was Assassinated</div>
 
-    <div id="powerUpsTab">Power-Ups</div>
+    <div id="powerUpsTab" class="tab">PowerUps</div>
     <div id="powerups" class="powerups">
       <div id="power1" class="power">Stealth Mode</div>
       <div id="power2" class="power">Invincible</div>
@@ -233,15 +233,15 @@ function startGame() {
       <div id="power4" class="power">Spider Sense</div>
     </div>
 
-    `;
+    <div id="achievmentsTab" class="tab">Achievements</div>
+    <div id="achievments" class="achievments">
+      <div id="achievment1" class="achievment">First Kill</div>
+      <div id="achievment2" class="achievment">Get Killed</div>
+      <div id="achievment3" class="achievment">Stealth Ninja</div>
+      <div id="achievment4" class="achievment">Last Assassin</div>
+    </div>
 
-  //   <div id="powerups" class="powerups">
-  //     <div id="power5" class="power">E</div>
-  //     <div id="power4" class="power">D</div>
-  //     <div id="power3" class="power">C</div>
-  //     <div id="power2" class="power">B</div>
-  //     <div id="power1" class="power">A</div>
-  // </div>
+    `;
 
   el = document.getElementById("powerMessage");
   el.classList.add("hide");
@@ -249,12 +249,13 @@ function startGame() {
 
   document.getElementById("tutorialbtn").addEventListener("click", tutorial);
   document.getElementById("powerUpsTab").addEventListener("click", showPowerups);
+  document.getElementById("achievmentsTab").addEventListener("click", showAchievments);
 
   document.getElementById("power1").addEventListener("click", power1);
   document.getElementById("power2").addEventListener("click", power2);
-  document.getElementById("power3").addEventListener("click", power3);
-  document.getElementById("power4").addEventListener("click", power4);
-  document.getElementById("power5").addEventListener("click", power5);
+  // document.getElementById("power3").addEventListener("click", power3);
+  // document.getElementById("power4").addEventListener("click", power4);
+  // document.getElementById("power5").addEventListener("click", power5);
 
   document.getElementById("taggedbtn").addEventListener("click", dead);
 
@@ -301,6 +302,15 @@ function getRandomInt(min, max) {
 function showPowerups() {
   pu = document.getElementById("powerups");
   put = document.getElementById("powerUpsTab");
+  ac = document.getElementById("achievments");
+  act = document.getElementById("achievmentsTab");
+
+  if(ac.classList.contains("animateSlideIn")){
+    ac.classList.remove("animateSlideIn");
+    ac.classList.add("animateSlideOut");
+    act.classList.remove("animateSlideIn2");
+    act.classList.add("animateSlideOut2");
+  }
   
   if(pu.classList.contains("animateSlideIn")){
     pu.classList.remove("animateSlideIn");
@@ -313,6 +323,33 @@ function showPowerups() {
     pu.classList.add("animateSlideIn");
     put.classList.remove("animateSlideOut2");
     put.classList.add("animateSlideIn2");
+  }
+}
+
+function showAchievments() {
+  ac = document.getElementById("achievments");
+  act = document.getElementById("achievmentsTab");
+  pu = document.getElementById("powerups");
+  put = document.getElementById("powerUpsTab");
+  
+  if(pu.classList.contains("animateSlideIn")){
+    pu.classList.remove("animateSlideIn");
+    pu.classList.add("animateSlideOut");
+    put.classList.remove("animateSlideIn2");
+    put.classList.add("animateSlideOut2");
+  }
+
+  if(ac.classList.contains("animateSlideIn")){
+    ac.classList.remove("animateSlideIn");
+    ac.classList.add("animateSlideOut");
+    act.classList.remove("animateSlideIn2");
+    act.classList.add("animateSlideOut2");
+  }
+  else {
+    ac.classList.remove("animateSlideOut");
+    ac.classList.add("animateSlideIn");
+    act.classList.remove("animateSlideOut2");
+    act.classList.add("animateSlideIn2");
   }
 }
 

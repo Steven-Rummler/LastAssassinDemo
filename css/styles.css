@@ -218,7 +218,7 @@ input {
   border-radius: 0.5rem;
   text-align: center;
   vertical-align: center;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 }
 
 .map {
@@ -255,7 +255,7 @@ input {
   padding: 0.5rem;
   font-size: 1.4rem;
   font-weight: bold;
-  border: 5px solid #575757;
+  border: 5px solid #635b5b;
   border-radius: 0.25rem;
   color: #575757;
   background-color: #e9eef3;
@@ -320,15 +320,39 @@ input {
     border-radius: .25rem;
 } */
 
+#achievmentsTab {
+  top: 50%;
+}
+
+.achievments {
+  border: 2px solid #6c090c;
+  border-top: 0;
+  background-color: #e9eef3;
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  right: -41%;
+}
+
+.achievment {
+  background-color: #e9eef3;
+  padding: .8rem;
+  font-size: 1.2rem;
+  border-top: 2px solid #6c090c;
+}
+
 #powerUpsTab {
+  top: 25%;
+}
+
+.tab {
   position: absolute;
   right: 0;
-  top: 40%;
-  width: 2rem;
+  width: 2.5rem;
   padding-right: .1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: white;
   background-color: #6c090c;
   writing-mode: vertical-rl;
@@ -339,17 +363,19 @@ input {
 
 .powerups {
   border: 2px solid #6c090c;
+  border-top: 0;
   background-color: #e9eef3;
   width: 40%;
-
   position: absolute;
-  top: 40%;
+  top: 25%;
   right: -41%;
 }
 
 .power {
   background-color: #e9eef3;
   padding: .8rem;
+  font-size: 1.2rem;
+  border-top: 2px solid #6c090c;
 }
 
 .animateSlideIn {
@@ -367,6 +393,12 @@ input {
 .animateSlideOut2 {
   animation: 1s slideout2 forwards;
 }
+
+.available {
+  background-color: #6c090c;
+  color: #e9eef3;
+}
+
 
 @keyframes slidein {
   from {
@@ -443,11 +475,6 @@ input {
 .hide {
   opacity: 0;
   transition: opacity 400ms;
-}
-
-.available {
-  background-color: #6c090c;
-  color: #e9eef3;
 }
 
 .preloader {
